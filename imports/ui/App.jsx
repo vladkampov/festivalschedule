@@ -1,42 +1,39 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
- 
-import { Festivals } from '../api/festivals.jsx';
 
-// App component - represents the whole app
+import FestsList from './FestsList.jsx';
+
 class App extends Component {
-  renderFestivals() {
-    this.props.festivals.map((fest) => {
-      console.log(fest.title)
-    })
-    return this.props.festivals.map((fest) => (
-      <Festival key={fest._id} fest={fest} />
-    ));
+  constructor(props) {
+    super(props);
+    this.state = {
+      fest: null
+    };
+  }
+
+  onUpdate() {
+    console.log("lalвфыв")
   }
 
   render() {
     return (
-      <div>
+      <div className="app">
         <header>
           <div className="container">
             <h1>Festivals List</h1>
           </div>
         </header>
-   
-        <ul>
-          {this.renderFestivals()}
-        </ul>
+        <div id="app--body">
+          <div className="container">
+            <FestsList onUpdate={this.onUpdate}/>
+          </div>
+        </div>
       </div>
     );
   }
 }
-
-App.propTypes = {
-  festivals: PropTypes.array.isRequired,
-};
  
 export default createContainer(() => {
   return {
-    festivals: Festivals.find({}).fetch(),
   };
 }, App);

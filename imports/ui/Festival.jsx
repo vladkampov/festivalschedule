@@ -4,7 +4,9 @@ import React, { Component, PropTypes } from 'react';
 export default class Festival extends Component {
   render() {
     return (
-      <li>{this.props.fest.title}</li>
+      <div onClick={this.props.onClick}>
+        <p className="h3">{this.props.fest.title}</p>
+      </div>
     );
   }
 }
